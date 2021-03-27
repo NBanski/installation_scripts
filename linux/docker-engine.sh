@@ -10,6 +10,7 @@ sleep 5
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 # Take it slowly...
 sleep 5
+sudo apt update
 # Install Docker Engine:
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 # Run test:
