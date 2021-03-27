@@ -9,7 +9,7 @@ fi
 adduser --gecos GECOS $1
 usermod -aG sudo $1
 
-if test "$2" = ssh; then
+if test "$2" = "ssh"; then
   mkdir /home/$1/.ssh
   cp /root/.ssh/authorized_keys /home/$1/.ssh/authorized_keys
   chown --recursive $1:$1 /home/$1/.ssh
