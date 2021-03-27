@@ -12,5 +12,6 @@ usermod -aG sudo $1
 if test "$2" = ssh; then
   mkdir /home/$1/.ssh
   cp /.ssh/authorized_keys /home/$1/.ssh/authorized_keys
+  chown --recursive $1:$1 /home/$1/.ssh
   echo "SSH keys copied."
 fi
