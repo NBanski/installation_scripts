@@ -23,7 +23,7 @@ while getopts ":u:sf:h" opt; do
                 echo "Simple tool designed to speed up the server preparation process."
                 echo "-u username       adds a new user with elevated privileges"
                 echo "-s        copies the root SSH keys to the new user"
-                echo "-f port_number    changes the SSH port to a random port number, enables UFW, disables the root account and SSH password login"
+                echo "-f port_number    changes the SSH port to a given port number, enables UFW, disables the root account and SSH password login"
                 echo "-h        displays this prompt"
                 ;;
         \? )
