@@ -2,7 +2,7 @@
 while getopts ":u:sf:h" opt; do
         case ${opt} in
         u )
-                username=$OPTARG
+                USERNAME=$OPTARG
                 adduser --gecos "" $USERNAME
                 usermod -aG sudo $USERNAME
                 ;;
@@ -16,14 +16,20 @@ while getopts ":u:sf:h" opt; do
                 PORT=$OPTARG
                 sudo ufw enable 
                 sudo ufw allow $PORT
-                echo "UFW configured on port $PORT, SSH passwd authentication disabled, sshd_config changed accordingly. Restart SSH service now."
+                FILEPATH="/etc/ssh/sshd_config"
+                PORT_OLD="#Port 22"
+                PORT_NEW="Port $PORT"
+                sudo sed -i "s/$PORT_OLD/$PORT_NEW/" $FILEPATH
+                sudo sed -i "s/#PermitRootLogin prohibit-password/PermitRootLogin no/" $FILEPATH
+                sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" $FILEPATH
+                echo "SSH port changed to $PORT."
                 ;;
         h )
-                echo "ServerHandyMan v 1.0"
+                echo "ServerHandyMan v1.0"
                 echo "Simple tool designed to speed up the server preparation process."
                 echo "-u username       adds a new user with elevated privileges"
                 echo "-s        copies the root SSH keys to the new user"
-                echo "-f port_number    changes the SSH port to a given port number, enables UFW, disables the root account and SSH password login"
+                echo "-f port_number    changes the SSH port to a random port number, enables UFW, disables the root account and SSH password login"
                 echo "-h        displays this prompt"
                 ;;
         \? )
