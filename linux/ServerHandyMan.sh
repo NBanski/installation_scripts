@@ -20,7 +20,7 @@ while getopts ":u:sf:h" opt; do
                 PORT_OLD="#Port 22"
                 PORT_NEW="Port $PORT"
                 sudo sed -i "s/$PORT_OLD/$PORT_NEW/" $FILEPATH
-                sudo sed -i "s/#PermitRootLogin prohibit-password/PermitRootLogin no/" $FILEPATH
+                sudo sed -i "s/#PermitRootLogin /PermitRootLogin no/" $FILEPATH
                 sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" $FILEPATH
                 echo "SSH port changed to $PORT."
                 ;;
